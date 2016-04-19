@@ -11,7 +11,7 @@ stat-update: <strong>状态：</strong><span style="color:#fbca04;">■ </span> 
 自家制作的各种项目。
 ## OS67
 <hr>
-{% include github-card repo="LastAvenger/OS67" %}
+{% include github-card repo="bjxingdata/appDown" %}
 {{ page.stat-finished }}
 
 OS67 是一个基于 x86 的 unix-like 玩具内核，借鉴了大量 xv6 的代码。

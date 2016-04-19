@@ -5,6 +5,6 @@ paginate_path: "page:num"
 encoding: utf-8
 markdown: rdiscount
 name: George
-description:  No Silver Bullet.
+description:  WMYeah
 url: http://github.wmyeah.com/
 avatar: http://github.wmyeah.com/favicon.ico
