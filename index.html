@@ -1,42 +1,41 @@
 ---
-title: No Silver Bullet 
 layout: default
+title:
+description: 这是 PIZn 的又一个博客，它是基于 Jekyll 搭建起来的。在这里，不仅仅是用来快速记录工作，学习，生活的一点一滴的地方，更是 PIZn 对 Jekyll 的学习和使用的一次有意义的实践。
+keywords: PIZn, GitHub, Jekyll, Plugins, Works, Archives, Quotes, Violet, css, html, javascript, wordpress, logo, design, geek
 ---
-{% for post in paginator.posts %}
-<div class="post">
-    <div class="posttext">
-        <div class="posttitle">
-            <a href="{{ post.url }}">{{ post.title }}</a><hr>
-        </div>
-        <p> {{ post.excerpt | strip_html }} </p>
-    </div>
-    <div class="postfooter">
-        <div class="postdate">
-            <a href="/archives.html#{{ post.date | date:"%Y 年 %m 月" }}"><i class="fa fa-clock-o"></i>&nbsp;&nbsp;{{ post.date | date_to_string }}</a>
-        </div>
-        <div class="posttags">
-            {% for tag in post.tags %}
-            <a href="/tags.html#{{ tag }}">{{ tag }}&nbsp;&nbsp;</a>
-            {% endfor %}
-            <a href="/tags.html"><i class="fa fa-tags"></i></a>
-        </div>
-    </div>
-</div>
+<section class="lotus-logo fn-clear">
+    <hgroup class="violet-site">
+        <h1><a href="{{ site.url }}" >{{ site.title }}</a></h1>
+        <h2>{{ site.subTitle }}</h2>
+    </hgroup><!-- //violet-site -->
+</section>
+<article class="lotus-article">
+{% for rpost in paginator.posts limit:1 %}
+    <h3><a href="{{ rpost.url }}" title="{{ rpost.title }}" rel="bookmark">{{ rpost.title }}</a></h3>
+    <p itemprop="description">{{ rpost.description }}</p>
 {% endfor %}
-<!-- 分页器 -->
-<div class="switchpage">
-    {% if paginator.previous_page %}
-    {% if paginator.page == 2 %}
-    <a href="../"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;上 • 一页</a>
-    {% else %}
-    <a href="/page{{ paginator.previous_page }}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;上 • 一页</a>
-    {% endif %}
-    {% else %}
-    <a><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;上 • 尽头</a>
-    {% endif %}
-    {% if paginator.next_page %}
-    <a href="/page{{ paginator.next_page }}">下 • 一页&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-    {% else %}
-    <a>下 • 尽头&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-    {% endif %}
-</div>
+</article>
+<section class="lotus-double fn-clear">
+    <article class="article article-first">
+    <h3>最新文章</h3>
+        <ul>
+            {% for npost in site.posts limit:3 offset:2   %}
+            <li><a href="{{ npost.url }}" pubdate="{{ npost.date | date_to_utc | date: '%Y-%m-%d' }}" title="{{ npost.title }}" rel="bookmark">{{ npost.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </article>
+    <article class="article article-last">
+    <h3>相关页面</h3>
+    <ul>
+        <li>
+            {% for page in site.page %}
+            <a href="{{ page.url }}" rel="bookmark" title="{{page.text}}">{{ page.text }}</a>
+            {% if !page.last %}
+                <span class="lotus-squ">|</span>
+            {% endif %}
+            {% endfor %}
+        </li>
+    </ul>
+    </article>
+</section>

@@ -1,38 +1,50 @@
 ---
-title: 归档
 layout: default
+title: 文章归档
+description: 这是 PIZn 的又一个博客，它是基于 Jekyll 搭建起来的。在这里，不仅仅是用来快速记录工作，学习，生活的一点一滴的地方，更是 PIZn 对 Jekyll 的学习和使用的一次有意义的实践。
+keywords: PIZn, GitHub, Jekyll, Plugins, Works, Archives, Quotes, Violet, css, html, javascript, wordpress, logo, design, geek
 ---
-<div class="posttext" style="margin-bottom: 20px;">
-    <div class="posttitle">
-        <a href="{{ page.url }}"><i class="fa fa-archive"></i>&nbsp;&nbsp;归档</a><hr>
-    </div>
+
+<p class="lotus-breadcrub">
+    <a href="{{ site.url }}/index.html" rel="nofollow" rel="nofollow" title="首页">Home</a>
+    <span> &gt; </span>
+    {{ page.title }}
+</p>
+
+<h1 class="lotus-pagetit">Archives</h1>
+<article id="archives">
+
+{% for post in site.posts  %}
+  {% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
+  {% capture next_year %}{{ post.previous.date | date: "%Y" }}{% endcapture %}
+
+  {% if forloop.first %}
     <ul>
-        {% for post in site.posts %}
-        {% capture ym %}{{ post.date | date:"%Y 年 %m 月" }}{% endcapture %}
-        {% if yearmonth != ym %}
-        {% assign yearmonth = ym %}
-        <li><a href="#{{ ym }}">{{ ym }}</a></li>
-        {% endif %}
-        {% endfor %}
-    </ul>
-</div>
-<div class="post">
-    <div class="posttext">
-        <ul>
-            {% for post in site.posts %}
-            {% capture ym %}{{ post.date | date:"%Y 年 %m 月" }}{% endcapture %}
-            {% if yearmonth != ym %}
-            {% assign yearmonth = ym %}
-            </ul>
-            <blockquote id="{{ ym }}">{{ ym }}</blockquote>
+        <li><span>{{this_year}} &nbsp;</span>
             <ul>
-            {% endif %}
-            <li>
-            <time datetime="{{ post.date }}">{{ post.date | date:"%Y 年 %m 月" }}</time>
-            <a href="{{ post.url }}" title="{{ post.title }}">&nbsp;&nbsp;{{ post.title }}</a>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div class="postfooter"></div>
-</div>
+  {% endif %}
+
+                <li>{{ post.date | date: "%B %e" }} : <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+
+  {% if forloop.last %}
+            </ul>
+        </li>
+    </ul>
+  {% else %}
+    {% if this_year != next_year %}
+            </ul>
+        </li>
+    </ul>
+    <ul>
+          <li><span>{{next_year}} &nbsp;</span>
+            <ul>
+    {% endif %}
+  {% endif %}
+
+
+{% endfor %}
+
+
+
+
+</article>
